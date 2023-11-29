@@ -3,22 +3,6 @@ function getQueryParam(name) {
     return urlParams.get(name);
 }
 
-
-/*tenia qie hacer doble clcik uno para que se guardara y el otro para que redirigera y chat gpt me dijo que la solucion era por asinc en la funcion*/
-
-/*explicacion para entenderlo en el futuro, copio y pego explicacion chat gpt*/
-/*El problema puede estar relacionado con el manejo de eventos y la asincronía de las operaciones. 
-La función guardarCampos está haciendo una solicitud fetch, que es asíncrona, y al mismo tiempo está 
-actualizando el localStorage y redirigiendo a otra página. Es posible que la redirección esté ocurriendo 
-antes de que la actualización del localStorage y la solicitud fetch se completen.Puedes intentar hacer que 
-toda la lógica de actualización del producto y la redirección se realice después de que la solicitud fetch 
-se haya completado. Puedes hacer esto moviendo la lógica de redirección dentro del bloque then de la promesa 
-fetch. Además, puedes utilizar async/await para simplificar el manejo de la asincronía. Aquí hay una versión 
-modificada de tu código:*/
-
-/*Esta versión utiliza async/await para hacer que el código sea más legible y manejar la asincronía de una manera más clara. 
-La redirección se realiza después de que la lógica asíncrona se haya completado.*/
-
 async function guardarCampos() {
     try {
         let idProducto = getQueryParam('idProducto');/*para obetener el id del usuario de la url*/
