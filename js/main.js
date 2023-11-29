@@ -78,6 +78,79 @@ function volver() {
 
 /*---------FUNCION MOSTRAR PRODUCTOS EN EL CARRO--con try catch--------------------------------------------------------------------------------------------------------------*/
 
+
+function crearElementoProducto(imagenSrc, nombreTexto, precioTexto, cantidadTexto, idProducto) {
+    const divElement = document.createElement('div');
+    const imagen = document.createElement('img');
+    const nombre = document.createElement('p');
+    const precio = document.createElement('p');
+    const cantidad = document.createElement('p');
+    const botonEliminar = document.createElement('button');
+
+    divElement.classList.add('productoCarrito');
+
+    imagen.src = imagenSrc;
+    nombre.textContent = nombreTexto;
+    precio.textContent = precioTexto;
+    cantidad.textContent = cantidadTexto;
+
+    botonEliminar.textContent = 'Eliminar';
+    botonEliminar.addEventListener('click', () => eliminarProductoCarrito(idProducto));
+
+    divElement.appendChild(imagen);
+    divElement.appendChild(nombre);
+    divElement.appendChild(precio);
+    divElement.appendChild(cantidad);
+    divElement.appendChild(botonEliminar);
+
+    return divElement;
+}
+
+// Función para eliminar un producto del carrito
+function eliminarProductoCarrito(idProducto) {
+    // Elimina el producto del carrito y actualiza la vista
+    let carrito = JSON.parse(sessionStorage.getItem("carrito")) || [];
+    let index = carrito.findIndex(elemento => elemento.id === idProducto);/*busca el primer elemento con dicho indice */
+
+    if (index !== -1) {/*si es algo diferente de menos 1 es que lo ha encontrado y lo borra*/
+        carrito.splice(index, 1);
+        sessionStorage.setItem("carrito", JSON.stringify(carrito));
+        mostrarProductosCarrito();/*vuelvo a mostrar el carrito de nuevo*/
+    }
+}
+
+// Función principal para mostrar productos en el carrito
+async function mostrarProductosCarrito() {
+    let carrito = JSON.parse(sessionStorage.getItem("carrito"));
+    const carritohtml = document.getElementById("carrito");
+
+    // Limpiar el contenido existente antes de mostrar los productos
+    carritohtml.innerHTML = '';
+
+    carrito.forEach(async (elemento) => {
+        try {
+            let idProducto = elemento.id;
+
+            if (!localStorage.getItem(idProducto)) {
+                const res = await fetch(`https://fakestoreapi.com/products/${idProducto}`);
+                const data = await res.json();
+                const productoElemento = crearElementoProducto(data.image, data.title, data.price, "", idProducto);
+                carritohtml.appendChild(productoElemento);
+            } else {
+                const producto = JSON.parse(localStorage.getItem(idProducto));
+                const productoElemento = crearElementoProducto(producto.image, producto.title, producto.price, "", idProducto);
+                carritohtml.appendChild(productoElemento);
+            }
+        } catch (error) {
+            console.error('Error al mostrar productos en el carrito:', error);
+        }
+    });
+}
+
+
+
+
+/*
 function crearElementoProducto(imagenSrc, nombreTexto, precioTexto, cantidadTexto) {
     const divElement = document.createElement('div');
     const imagen = document.createElement('img');
@@ -98,9 +171,9 @@ function crearElementoProducto(imagenSrc, nombreTexto, precioTexto, cantidadText
 
     return divElement;
 }
-
+*/
 // Función principal para mostrar productos en el carrito
-
+/*
 async function mostrarProductosCarrito() {
     let carrito = JSON.parse(sessionStorage.getItem("carrito"));
     const carritohtml = document.getElementById("carrito");
@@ -124,7 +197,7 @@ async function mostrarProductosCarrito() {
         }
     });
 }
-
+*/
 /*---------FUNCION AÑADIR PRODUCTO AL CARRITO----con try catch------------------------------------------------------------------------------------------------------------*/
 
 function añadirCarrito(idProducto) {
