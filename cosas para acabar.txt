@@ -1,9 +1,0 @@
-
-que no me deje registrarme con lo usuario de la api HECHO
-imprimir los carritos que ya estan en la api HECHO
-
-
-subirlo a git 
-refactorizar los metodos gordos (COMENTAR)
-lit element(nav) 
-readme
