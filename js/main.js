@@ -18,7 +18,7 @@ function borrar(idProducto) {
 
     mostrarPreloader();
 
-    var productoExistente = JSON.parse(localStorage.getItem(idProducto));
+    let productoExistente = JSON.parse(localStorage.getItem(idProducto));
 
     if (!productoExistente) {
         console.log("borrado");
@@ -61,7 +61,7 @@ function volver() {
     mostrarPreloader();
 
     try {
-        var cajonProducto = document.getElementById('cajonProducto');
+        let cajonProducto = document.getElementById('cajonProducto');
         while (cajonProducto.firstChild) {
             cajonProducto.removeChild(cajonProducto.firstChild);
         }
@@ -129,13 +129,13 @@ async function mostrarProductosCarrito() {
 
 function añadirCarrito(idProducto) {
     try {
-        var producto = JSON.parse(localStorage.getItem(idProducto));
+        let producto = JSON.parse(localStorage.getItem(idProducto));
 
         if (!producto) {
             fetch(`https://fakestoreapi.com/products/${idProducto}`)
                 .then(res => res.json())
                 .then(data => {
-                    var carrito = JSON.parse(sessionStorage.getItem('carrito')) || [];
+                    let carrito = JSON.parse(sessionStorage.getItem('carrito')) || [];
                     carrito.push(data);
                     sessionStorage.setItem('carrito', JSON.stringify(carrito));
                     window.location.href = '../html/pagina.html';
@@ -144,7 +144,7 @@ function añadirCarrito(idProducto) {
                     console.error('Error al obtener datos del producto:', error);
                 });
         } else {
-            var carrito = JSON.parse(sessionStorage.getItem('carrito')) || [];
+            let carrito = JSON.parse(sessionStorage.getItem('carrito')) || [];
             carrito.push(producto);
             sessionStorage.setItem('carrito', JSON.stringify(carrito));
             window.location.href = '../html/pagina.html';
@@ -154,21 +154,20 @@ function añadirCarrito(idProducto) {
     }
 }
 
-
 /*---------VER PRODUCTO INDIVIDUAL----------------------------------------------------------------------------------------------------------------*/
 
 function verProducto(idProducto) {
 
-    var producto = JSON.parse(localStorage.getItem(idProducto));
+    let producto = JSON.parse(localStorage.getItem(idProducto));
 
-    var cajon = document.querySelector(".cajon");
+    let cajon = document.querySelector(".cajon");
 
     while (cajon.firstChild) {
         cajon.removeChild(cajon.firstChild);
     }
     
     // Limpiar el contenido existente en el cajonProducto
-    var cajonProducto = document.getElementById('cajonProducto');
+    let cajonProducto = document.getElementById('cajonProducto');
     while (cajonProducto.firstChild) {
         cajonProducto.removeChild(cajonProducto.firstChild);
     }
@@ -422,11 +421,11 @@ function mostrarProductos() {
 
 /*---------METODO PARA MOSTRAR LAS CARTAS POR CATEGORIA----------------------------------------------------------------------------------------------------------------*/
 
-var enlaceTodo = document.getElementById("todo");
-var enlaceHombre = document.getElementById("hombre");
-var enlaceMujer = document.getElementById("mujer");
-var enlaceTeclogia = document.getElementById("tecnologia");
-var enlaceJoyas = document.getElementById("joyas");
+let enlaceTodo = document.getElementById("todo");
+let enlaceHombre = document.getElementById("hombre");
+let enlaceMujer = document.getElementById("mujer");
+let enlaceTeclogia = document.getElementById("tecnologia");
+let enlaceJoyas = document.getElementById("joyas");
 
 enlaceTodo.addEventListener("click", mostrarCategoriaTodo);
 enlaceHombre.addEventListener("click", mostrarCategoriaHombre);
@@ -436,14 +435,14 @@ enlaceTeclogia.addEventListener("click", mostrarCategoriaTech);
 
 function mostrarCategoriaTodo() {
     
-    var cajon = document.querySelector(".cajon");
+    let cajon = document.querySelector(".cajon");
 
     while (cajon.firstChild) {
         cajon.removeChild(cajon.firstChild);
     }
 
     // Limpiar el contenido existente en el cajonProducto
-    var cajonProducto = document.getElementById('cajonProducto');
+    let cajonProducto = document.getElementById('cajonProducto');
     while (cajonProducto.firstChild) {
         cajonProducto.removeChild(cajonProducto.firstChild);
     }
@@ -455,7 +454,7 @@ function mostrarCategoriaTodo() {
 
 function mostrarCategoriaHombre() {
     
-    var cajon = document.querySelector(".cajon");
+    let cajon = document.querySelector(".cajon");
 
     while (cajon.firstChild) {
         cajon.removeChild(cajon.firstChild);
@@ -463,7 +462,7 @@ function mostrarCategoriaHombre() {
 
     
     // Limpiar el contenido existente en el cajonProducto
-    var cajonProducto = document.getElementById('cajonProducto');
+    let cajonProducto = document.getElementById('cajonProducto');
     while (cajonProducto.firstChild) {
         cajonProducto.removeChild(cajonProducto.firstChild);
     }
@@ -476,14 +475,14 @@ function mostrarCategoriaHombre() {
 
 function mostrarCategoriaMujer() {
     
-    var cajon = document.querySelector(".cajon");
+    let cajon = document.querySelector(".cajon");
 
     while (cajon.firstChild) {
         cajon.removeChild(cajon.firstChild);
     }
 
     // Limpiar el contenido existente en el cajonProducto
-    var cajonProducto = document.getElementById('cajonProducto');
+    let cajonProducto = document.getElementById('cajonProducto');
     while (cajonProducto.firstChild) {
         cajonProducto.removeChild(cajonProducto.firstChild);
     }
@@ -496,14 +495,14 @@ function mostrarCategoriaMujer() {
 
 function mostrarCategoriaJoyas() {
     
-    var cajon = document.querySelector(".cajon");
+    let cajon = document.querySelector(".cajon");
 
     while (cajon.firstChild) {
         cajon.removeChild(cajon.firstChild);
     }
 
     // Limpiar el contenido existente en el cajonProducto
-    var cajonProducto = document.getElementById('cajonProducto');
+    let cajonProducto = document.getElementById('cajonProducto');
     while (cajonProducto.firstChild) {
         cajonProducto.removeChild(cajonProducto.firstChild);
     }
@@ -516,14 +515,14 @@ function mostrarCategoriaJoyas() {
 
 function mostrarCategoriaTech() {
     
-    var cajon = document.querySelector(".cajon");
+    let cajon = document.querySelector(".cajon");
 
     while (cajon.firstChild) {
         cajon.removeChild(cajon.firstChild);
     }
 
     // Limpiar el contenido existente en el cajonProducto
-    var cajonProducto = document.getElementById('cajonProducto');
+    let cajonProducto = document.getElementById('cajonProducto');
     while (cajonProducto.firstChild) {
         cajonProducto.removeChild(cajonProducto.firstChild);
     }
@@ -754,7 +753,7 @@ function imprimirCarritos() {
             });
 
             // Agregar el div al contenedor con el id 'cajonUsusario'
-            var cajonUsuario = document.getElementById('cajonUser');
+            let cajonUsuario = document.getElementById('cajonUser');
             cajonUsuario.appendChild(divElement);
         });
     } catch (error) {
@@ -809,7 +808,7 @@ function imprimirCarritos() {
                 });
         
                 // Agregar el div general al contenedor en el DOM
-                var cajonUsuario = document.getElementById('cajonUser');
+                let cajonUsuario = document.getElementById('cajonUser');
                 cajonUsuario.appendChild(divElement);
             });
         }else {
@@ -844,7 +843,7 @@ function cargarPerfil(){
     cajonInfo.appendChild(nombre)
     cajonInfo.appendChild(contraseña)
 
-    var cajonUsuario = document.getElementById('cajonUser');
+    let cajonUsuario = document.getElementById('cajonUser');
     cajonUsuario.appendChild(cajonInfo)
 
 }
