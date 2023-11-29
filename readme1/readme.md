@@ -274,3 +274,146 @@ La función `hacerCardCategoria` se encarga de generar tarjetas (cards) para pro
 
    d. Si el producto cumple con las condiciones anteriores, crea y muestra una tarjeta similar a las descritas anteriormente.
 
+# Documentación del Método de Registro---------------->
+
+Este script JavaScript maneja el registro de usuarios en una aplicación web a través de un formulario. A continuación, se describe el funcionamiento del método.
+
+# Flujo de Registro
+
+ 1. Obtención de Datos del Formulario:
+
+Captura el evento de envío del formulario y evita la recarga de la página.
+Recupera el nombre de usuario y la contraseña ingresados por el usuario.
+
+2. Verificación en la API Externa:
+
+-Realiza una solicitud a 'https://fakestoreapi.com/users' para obtener usuarios existentes.
+-Compara el nombre de usuario ingresado con los nombres de usuario en la API externa.
+-Si hay una coincidencia, muestra una alerta y establece una bandera (x) en verdadero.
+
+3. Verificación en Usuarios Locales:
+
+Obtiene todos los usuarios registrados localmente.
+Comprueba si hay algún usuario local con el mismo nombre de usuario.
+Si existe un usuario local o la bandera x está activada, muestra una alerta indicando que el nombre de usuario ya está registrado.
+
+4. Proceso de Registro:
+
+Si no hay conflictos, obtiene el siguiente ID único para el nuevo usuario.
+Crea un nuevo objeto de usuario con el ID, nombre de usuario, contraseña y una lista de carritos vacía.
+Almacena el nuevo usuario en el almacenamiento local del navegador.
+Muestra una alerta de registro exitoso y restablece el formulario.
+Funciones Auxiliares
+
+obtenerUsuariosRegistrados()
+Obtiene todos los usuarios registrados localmente. Utiliza el almacenamiento local y devuelve un array de objetos de usuario.
+
+obtenerNuevoUsuarioId()
+Calcula y devuelve el siguiente ID único para un nuevo usuario. Utiliza el almacenamiento local para realizar un seguimiento del último ID utilizado.
+
+5. Manejo de Errores
+El script incluye manejo básico de errores, registrando mensajes de error en la consola. Puedes personalizar el manejo de errores según tus necesidades.
+
+## Script de Inicio de Sesión----------------->
+
+Este script maneja el formulario de inicio de sesión en tu aplicación web. Se ejecuta cuando el documento HTML está completamente cargado (`DOMContentLoaded`). El script utiliza la API 'https://fakestoreapi.com/users' y también verifica los usuarios almacenados localmente en el `localStorage`.
+
+### Funcionamiento:
+
+1. Escucha el evento 'DOMContentLoaded' para asegurarse de que el documento HTML esté completamente cargado antes de ejecutar el script.
+
+2. Obtiene el formulario de inicio de sesión del documento.
+
+3. Agrega un evento 'submit' al formulario para manejar el envío del formulario.
+
+4. Previne el comportamiento predeterminado del formulario para evitar la recarga de la página.
+
+5. Obtiene los valores del nombre de usuario y contraseña del formulario.
+
+6. Realiza una solicitud a la API 'https://fakestoreapi.com/users' para obtener la lista de usuarios disponibles.
+
+7. Itera sobre la lista de usuarios de la API para verificar si el usuario y la contraseña proporcionados coinciden con alguno de los usuarios.
+
+8. Si se encuentra un usuario válido en la API, establece la información del usuario en la sesión (`sessionStorage`), restablece el formulario y redirige a la página principal.
+
+9. Itera sobre los usuarios almacenados localmente en el `localStorage` para buscar coincidencias.
+
+10. Si se encuentra un usuario válido en el `localStorage`, realiza acciones similares a las descritas anteriormente.
+
+11. Si no se encuentra ningún usuario válido, muestra un mensaje de error.
+
+## Función `guardarCampos`------>
+
+La función `guardarCampos` se encarga de actualizar o crear un producto en el almacenamiento local (`localStorage`) basado en la información proporcionada en un formulario de edición. La función se utiliza en el contexto de la edición de un producto existente.
+
+### Parámetros:
+- Ninguno.
+
+### Funcionamiento:
+
+1. **Obtención de Parámetros:** Utiliza la función `getQueryParam` para obtener el identificador único del producto (`idProducto`) de la URL.
+
+2. **Obtención de Datos del Formulario:** Recolecta los valores del formulario de edición, incluyendo `title`, `price`, y `description`.
+
+3. **Verificación de Existencia del Producto:** Verifica si ya existe un producto con el `idProducto` en el `localStorage`.
+
+4. **Actualización o Creación del Producto:**
+   - Si el producto existe, actualiza sus campos específicos (`title`, `price`, y `description`) mientras mantiene otros campos inalterados.
+   - Si el producto no existe, realiza una solicitud asíncrona (`fetch`) a la API 'https://fakestoreapi.com/products' para obtener la información completa del producto y luego crea un nuevo objeto con los campos actualizados del formulario.
+
+5. **Redirección después de la Operación Asincrónica:** Utiliza `async/await` para manejar la asincronía de la solicitud fetch. La redirección a la página principal ('../html/pagina.html') se realiza después de que la operación asincrónica se haya completado con éxito.
+
+6. **Manejo de Errores:** Captura cualquier error que pueda ocurrir durante la ejecución y lo registra en la consola.
+
+7. **Evitar Recarga de la Página:** Retorna `false` al final de la función para evitar que el formulario se envíe y recargue la página.
+
+
+## nuevo producto ---------->
+
+## Función `obtenerProximaClave`
+
+La función `obtenerProximaClave` se utiliza para encontrar el número más grande como clave en el `localStorage` y devolver el siguiente número como clave para un nuevo producto.
+
+### Parámetros:
+- Ninguno.
+
+### Funcionamiento:
+
+1. **Obtención de Claves:** Obtiene todas las claves presentes en el `localStorage`.
+
+2. **Filtrado de Claves Válidas:** Filtra solo las claves que son números válidos, ignorando las que no son números.
+
+3. **Verificación de Claves Válidas:** Si no hay claves válidas o todas son menores que 21, devuelve 21 como la próxima clave.
+
+4. **Obtención del Número Más Grande:** Encuentra el número más grande entre las claves y le suma uno para obtener la próxima clave.
+
+5. **Retorno de la Próxima Clave:** Devuelve el número encontrado como la próxima clave.
+
+### Uso:
+
+Se utiliza en la función `nuevoProducto` para obtener la clave adecuada para el nuevo producto a ser guardado en el `localStorage`.
+
+## Función `nuevoProducto`
+
+La función `nuevoProducto` se utiliza para agregar un nuevo producto al `localStorage` y a la API 'https://fakestoreapi.com/products'.
+
+### Parámetros:
+- Ninguno.
+
+### Funcionamiento:
+
+1. **Obtención de Datos del Formulario:** Recolecta los valores del formulario que representan un nuevo producto, incluyendo `title`, `price`, `description`, `categoria`, e `imagen`.
+
+2. **Obtención de la Próxima Clave:** Utiliza la función `obtenerProximaClave` para obtener la próxima clave disponible para el nuevo producto.
+
+3. **Solicitud a la API para Crear el Producto:** Realiza una solicitud `POST` a la API 'https://fakestoreapi.com/products', creando un nuevo producto con la información proporcionada.
+
+4. **Actualización de las Propiedades del Nuevo Producto:** Después de recibir la respuesta de la API, actualiza las propiedades del objeto `json` con la nueva clave (`id`) y la información del formulario.
+
+5. **Guardado en el localStorage:** Usa la nueva clave como clave en el `localStorage` y guarda el objeto `json` como el valor asociado.
+
+### Uso:
+
+Se llama típicamente cuando el usuario confirma la creación de un nuevo producto en el formulario de creación.
+
+Esta documentación proporciona información sobre cómo se utilizan y qué hacen las funciones `obtenerProximaClave` y `nuevoProducto` en el contexto de tu aplicación.

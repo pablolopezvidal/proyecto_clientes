@@ -1,66 +1,76 @@
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     const loginForm = document.getElementById("inicioSesionForm");
 
-    loginForm.addEventListener("submit", function(event) {
+    loginForm.addEventListener("submit", function (event) {
         event.preventDefault();
 
         const username = loginForm.elements.username.value;
         const password = loginForm.elements.password.value;
         let usuarioEncontrado = false; // Variable para rastrear si se encontró un usuario válido
 
-        fetch('https://fakestoreapi.com/users')
-            .then(res => res.json())
-            .then(usuariosDeLaApi => {
-                console.log(usuariosDeLaApi);
+        try {
+            fetch('https://fakestoreapi.com/users')
+                .then(res => res.json())
+                .then(usuariosDeLaApi => {
+                    console.log(usuariosDeLaApi);
 
-                usuariosDeLaApi.forEach(usuarioAPI => {
-                    if (username === usuarioAPI.username && password === usuarioAPI.password) {
-                        alert('ese usuario ya existe en la api, .');
+                    usuariosDeLaApi.forEach(usuarioAPI => {
+                        if (username === usuarioAPI.username && password === usuarioAPI.password) {
+                            alert('ese usuario ya existe en la api, .');
 
-                        sessionStorage.setItem('usuario', JSON.stringify(usuarioAPI));
+                            sessionStorage.setItem('usuario', JSON.stringify(usuarioAPI));
+                            sessionStorage.setItem('carrito', JSON.stringify([]));
+                            loginForm.reset();
+                            localStorage.setItem(`user${usuarioAPI.id}`, JSON.stringify(usuarioAPI));
+                            window.location.href = '../html/pagina.html';
+                            usuarioEncontrado = true; // Usuario encontrado, se establece a true
+                        }
+                    });
+                })
+                .catch(error => {
+                    console.error('Error al obtener usuarios de la API:', error);
+                    // Puedes manejar el error aquí según tus necesidades
+                });
+
+            for (let i = 0; i < localStorage.length; i++) {
+                const clave = localStorage.key(i);
+                if (clave && clave.startsWith('user')) {
+                    const usuario = JSON.parse(localStorage.getItem(clave));
+                    let id = usuario.id;
+
+                    console.log(id);
+
+                    if (usuario.username === username && usuario.password === password) {
+                        const usuario1 = {
+                            id: id,
+                            username: username,
+                            password: password,
+                            carrito: []
+                        };
+
+                        alert('Se encontró el usuario con el nombre y contraseña específicos.');
+
+                        sessionStorage.setItem('usuario', JSON.stringify(usuario1));
                         sessionStorage.setItem('carrito', JSON.stringify([]));
-                        loginForm.reset();
-                        localStorage.setItem(`user${usuarioAPI.id}`, JSON.stringify(usuarioAPI));
+                        inicioSesionForm.reset();
                         window.location.href = '../html/pagina.html';
                         usuarioEncontrado = true; // Usuario encontrado, se establece a true
+                        break;
                     }
-                });                
-            });
-
-        for (let i = 0; i < localStorage.length; i++) {
-            const clave = localStorage.key(i);
-            if (clave && clave.startsWith('user')) {
-                const usuario = JSON.parse(localStorage.getItem(clave));
-                let id = usuario.id;
-
-                console.log(id);
-
-                if (usuario.username === username && usuario.password === password) {
-                    const usuario1 = {
-                        id: id,
-                        username: username,
-                        password: password,
-                        carrito: []
-                    };
-
-                    alert('Se encontró el usuario con el nombre y contraseña específicos.');
-
-                    sessionStorage.setItem('usuario', JSON.stringify(usuario1));
-                    sessionStorage.setItem('carrito', JSON.stringify([]));
-                    inicioSesionForm.reset();
-                    window.location.href = '../html/pagina.html';
-                    usuarioEncontrado = true; // Usuario encontrado, se establece a true
-                    break;
                 }
             }
-        }
 
-        // Si no se encontró un usuario válido, mostrar mensaje de error
-        if (!usuarioEncontrado) {
-            alert('Usuario o contraseña incorrectos.');
+            // Si no se encontró un usuario válido, mostrar mensaje de error
+            if (!usuarioEncontrado) {
+                alert('Usuario y contraseña no encontrados.');
+            }
+        } catch (error) {
+            console.error('Error general:', error);
+            // Puedes manejar el error general aquí según tus necesidades
         }
     });
 });
+
 
 
 
