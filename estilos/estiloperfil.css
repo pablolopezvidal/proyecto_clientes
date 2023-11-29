@@ -1,0 +1,35 @@
+*{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Roboto', sans-serif;
+
+}
+#cajonUser{
+    width: 70vw;
+    height: auto;
+    border: 2px solid gainsboro;
+    border-radius: 12px;
+    gap: 30px;
+    padding: 30px;
+}
+.cajonInfo{
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    padding-left:20px;
+    border-radius: 8px;
+}
+.productoCarritosUSer{
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    background-color: rgb(218, 218, 218);
+    padding-left:20px;
+    border-radius: 8px;
+
+}
+
+  
