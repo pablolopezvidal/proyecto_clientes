@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../estilos/estiloAñadirProducto.css">
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Bebas+Neue&family=Montserrat:wght@200;300&family=Raleway:wght@300&family=Roboto:wght@100&family=Staatliches&display=swap" rel="stylesheet">
+</head>
+<body>
+    <p>añade el producto</p>
+    <form action="pagina.html" method="POST" onsubmit="return nuevoProducto()">
+        
+        <label for="titulo">Título:</label>
+        <input type="text" id="titulo" name="titulo" required>
+    
+        <label for="precio">Precio:</label>
+        <input type="number" id="precio" name="precio" required>
+    
+        <label for="descripcion">Descripción:</label>
+        <textarea id="descripcion" name="descripcion" required></textarea>
+    
+        <label for="categoria">Categoría:</label>
+        <select id="categoria" name="categoria" required>
+            <option value="electronics">Electronics</option>
+            <option value="jewelry">Jewelry</option>
+            <option value="men's clothing">Men's Clothing</option>
+            <option value="women's clothing">Women's Clothing</option>
+        </select>
+    
+        <label for="imagen">Imagen URL:</label>
+        <input type="url" id="imagen" name="imagen" required>
+    
+        <button type="submit" onsubmit="nuevoProducto()">Enviar</button>
+    </form>
+
+    <script src="../js/nuevoProducto.js" defer></script>
+</body>
+</html>
+
+
+
+
+
