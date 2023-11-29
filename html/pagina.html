@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../estilos/estilos.css">
+    <script src="../js/main.js" defer></script>
+    <!--<script type="module" src="js/litelement.js" defer></script>-->
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Bebas+Neue&family=Montserrat:wght@200;300&family=Nunito:wght@700&family=Raleway:wght@300&family=Roboto:wght@100&family=Staatliches&display=swap" rel="stylesheet">
+</head>
+<body>
+    
+    <div id="preloader" class="active">
+        <div class="spinner"></div>
+    </div>
+    
+    <div id="barraSuperior">   
+        <a class="menu__link" id="todo" href="#">Todo</a> 
+        <a class="menu__link" id="hombre" href="#">Hombre</a>
+        <a class="menu__link" id="mujer" href="#">Mujer</a>
+        <a class="menu__link" id="tecnologia" href="#">Tecnologia</a>
+        <a class="menu__link" id="joyas" href="#">Joyas</a>
+        <div id="botonCarrito"></div>
+        <div id="botonPerfil">
+            <svg class="user-img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="M12,12.5c-3.04,0-5.5,1.73-5.5,3.5s2.46,3.5,5.5,3.5,5.5-1.73,5.5-3.5-2.46-3.5-5.5-3.5Zm0-.5c1.66,0,3-1.34,3-3s-1.34-3-3-3-3,1.34-3,3,1.34,3,3,3Z" stroke="white" fill="white"></path>
+            </svg>
+        </div>
+        <button class="Btn" onclick="location.href='añadirProducto.html'">
+            <div class="sign">+</div>
+            <div class="text">Create</div>
+        </button>  
+    </div>
+    <div id="cajon1">
+        <div id="parte_primcipal">
+            <script type="module">
+                mostrarProductos(); 
+            </script>
+            <div id="cajonProducto">
+    
+            </div>
+            <div class="cajon">
+               
+            </div>
+        </div>
+        <div id="parte_carrito">
+            <h2>TU CARRITO</h2>
+            <div id="carrito">
+                
+            </div>
+            <button class="botonProducto2" onclick="guardarCarrito()">Guardar carrrito</button>
+        </div>
+    </div>
+    <script type="module">
+        mostrarProductosCarrito(); 
+    </script>
+</body>
+</html>
